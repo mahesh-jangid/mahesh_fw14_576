@@ -30,7 +30,7 @@
   console.log(articles);
   const DOM_main = document.querySelector("#main");
 
-  let search = document.querySelector("#searchbar").value;
+  let search = JSON.parse(localStorage.getItem("search_term"));
 
   search.addEventListener("click", function () {
     let response = apiCall(

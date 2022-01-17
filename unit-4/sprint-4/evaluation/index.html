@@ -47,6 +47,8 @@
     console.log(articles);
     const DOM_main = document.querySelector("#main");
     const DOM_sidebar = document.querySelector("#sidebar");
+    let search = document.querySelector("#searchbar").value;
+    localStorage.setItem("search_term", JSON.stringify(search));
 
     DOM_sidebar.innerHTML = sidebar();
     window.onload = () => {
