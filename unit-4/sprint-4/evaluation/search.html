@@ -24,6 +24,7 @@
   </body>
 </html>
 <script type="module">
+  import storeSearchterm from "./scripts/main.js";
   import { apiCall, appendArticles } from "./scripts/main.js";
 
   let articles = JSON.parse(localStorage.getItem("article"));
@@ -33,10 +34,10 @@
   let search = JSON.parse(localStorage.getItem("search_term"));
 
   search.addEventListener("click", function () {
-    let response = apiCall(
-      `https://gnews.io/api/v4/search?q=${search}&token=74d8f1a798f3cccd678a1fd7ae78a19a`
-    );
-    response
+    let response = `https://gnews.io/api/v4/search?q=${search}&token=74d8f1a798f3cccd678a1fd7ae78a19a`;
+
+    let result = storeSearchterm(response);
+    result
       .then((res) => {
         appendArticles(res, DOM_main);
       })

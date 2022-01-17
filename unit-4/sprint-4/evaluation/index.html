@@ -43,14 +43,16 @@
   <script type="module">
     import { apiCall, appendArticles } from "./scripts/main.js";
     import sidebar from "./components/sidebar.js";
+
+    const DOM_sidebar = document.querySelector("#sidebar");
+
+    DOM_sidebar.innerHTML = sidebar();
     let articles = JSON.parse(localStorage.getItem("article"));
     console.log(articles);
     const DOM_main = document.querySelector("#main");
-    const DOM_sidebar = document.querySelector("#sidebar");
+
     let search = document.querySelector("#searchbar").value;
     localStorage.setItem("search_term", JSON.stringify(search));
-
-    DOM_sidebar.innerHTML = sidebar();
     window.onload = () => {
       let response = apiCall(
         `https://gnews.io/api/v4/top-headlines?&country=in&lang=en&token=74d8f1a798f3cccd678a1fd7ae78a19a`
