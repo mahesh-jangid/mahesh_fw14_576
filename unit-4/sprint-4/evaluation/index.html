@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+
+  <body>
+    <div id="container">
+      <div id="sidebar">
+        <!--DO NOT CHANGE THIS ID's-->
+      </div>
+
+      <div id="main">
+        <!--DO NOT CHANGE THIS ID's-->
+        <!-- <div class="news_cont">
+          <div class="title">dsaaaaaaaaaaaa</div>
+          <div class="desc">saddddddddddddd</div>
+          <div class="img">
+            <img src="" alt="" />
+          </div>
+        </div>
+        <div class="news_cont">
+          <div class="title">dsaaaaaaaaaaaa</div>
+          <div class="desc">saddddddddddddd</div>
+          <div class="img">
+            <img src="" alt="" />
+          </div>
+        </div>
+        <div class="news_cont">
+          <div class="title">dsaaaaaaaaaaaa</div>
+          <div class="desc">saddddddddddddd</div>
+          <div class="img">
+            <img src="" alt="" />
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </body>
+  <script type="module">
+    import { apiCall, appendArticles } from "./scripts/main.js";
+    import sidebar from "./components/sidebar.js";
+
+    const DOM_main = document.querySelector("#main");
+    const DOM_sidebar = document.querySelector("#sidebar");
+    DOM_sidebar.innerHTML = sidebar();
+    window.onload = () => {
+      let response = apiCall(
+        "https://gnews.io/api/v4/search?q=example&token=465884960789b94b4f9402ff9ac8bc20"
+      );
+      response
+        .then((res) => {
+          appendArticles(res, DOM_main);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+  </script>
+</html>
