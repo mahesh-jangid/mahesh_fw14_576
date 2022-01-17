@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="./styles/main.css" />
   </head>
 
   <body>
@@ -14,15 +14,34 @@
 
       <!-- show headline, description and image -->
 
+      <!-- Wrong ->
+      <a
+        href="/Users/jonny/Desktop/misc/jugnu-tester/template-U3C4/Template-U3C4/news.html"
+      ></a>
 
-
-      Wrong -> <a href="/Users/jonny/Desktop/misc/jugnu-tester/template-U3C4/Template-U3C4/news.html"></a>
-
-
-      Correct -> <a href="/news.html"></a>
-
-
+      Correct -> <a href="/news.html"></a> -->
     </div>
   </body>
-
 </html>
+<script type="module">
+  import { apiCall, appendArticles } from "./scripts/main.js";
+
+  let articles = JSON.parse(localStorage.getItem("article"));
+  console.log(articles);
+  const DOM_main = document.querySelector("#main");
+
+  let search = document.querySelector("#searchbar").value;
+
+  search.addEventListener("click", function () {
+    let response = apiCall(
+      `https://gnews.io/api/v4/search?q=${search}&token=74d8f1a798f3cccd678a1fd7ae78a19a`
+    );
+    response
+      .then((res) => {
+        appendArticles(res, DOM_main);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+</script>

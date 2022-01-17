@@ -43,13 +43,15 @@
   <script type="module">
     import { apiCall, appendArticles } from "./scripts/main.js";
     import sidebar from "./components/sidebar.js";
-
+    let articles = JSON.parse(localStorage.getItem("article"));
+    console.log(articles);
     const DOM_main = document.querySelector("#main");
     const DOM_sidebar = document.querySelector("#sidebar");
+
     DOM_sidebar.innerHTML = sidebar();
     window.onload = () => {
       let response = apiCall(
-        "https://gnews.io/api/v4/search?q=example&token=465884960789b94b4f9402ff9ac8bc20"
+        `https://gnews.io/api/v4/top-headlines?&country=in&lang=en&token=74d8f1a798f3cccd678a1fd7ae78a19a`
       );
       response
         .then((res) => {
@@ -59,5 +61,21 @@
           console.log(err);
         });
     };
+
+    const DOM_article_Cont = document.querySelectorAll("#news");
+    DOM_article_Cont.forEach(function (news) {
+      news.addEventListener("click", function () {
+        articles.forEach(function (elem) {
+          let obj = {
+            title: elem.title,
+            desc: elem.description,
+            image: elem.image,
+          };
+          localStorage.setItem("article", JSON.stringify(obj));
+        });
+
+        window.location.href = "./news.html";
+      });
+    });
   </script>
 </html>

@@ -6,7 +6,6 @@ async function apiCall(url) {
     let data = await res.json();
 
     let response = data.articles;
-    console.log(data);
 
     return response;
   } catch (err) {
@@ -18,7 +17,7 @@ function appendArticles(articles, main) {
   articles.forEach((article) => {
     // for (var i = 0; i < article.length; i++) {
     let div = document.createElement("div");
-    let html = ` <div class="news_cont">
+    let html = ` <div class="news_cont" id="news">
           <div class="title">${article.title}</div>
           <div class="desc">${article.description}</div>
           <div class="img">
@@ -28,7 +27,12 @@ function appendArticles(articles, main) {
 
     div.insertAdjacentHTML("afterbegin", html);
     main.append(div);
-    console.log(main);
+    localStorage.setItem("article", JSON.stringify(articles));
+    //       div.addEventListener("click", function () {
+    //           let obj = {
+
+    //       }
+    //   })
     // }
   });
 }

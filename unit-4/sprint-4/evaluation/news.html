@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="./styles/main.css" />
   </head>
 
   <body>
@@ -23,12 +23,32 @@
         <img id="img" src="" alt="" />
         <!--show news image here-->
 
-
         <div id="content">
           <!--add news content here-->
         </div>
       </div>
     </div>
   </body>
-
 </html>
+<script type="module">
+  import { apiCall, appendArticles } from "./scripts/main.js";
+  import sidebar from "./components/sidebar.js";
+  let articles = JSON.parse(localStorage.getItem("article"));
+  console.log(articles);
+  const DOM_main = document.querySelector("#main");
+  const DOM_sidebar = document.querySelector("#sidebar");
+  DOM_sidebar.innerHTML = sidebar();
+
+  articles.forEach(function (el) {
+    let headline = document.querySelector("#headline");
+    headline.innerHTML = el.title;
+    console.log(headline);
+    let image = document.querySelector("#img");
+
+    image.innerHTML = el.image;
+    let des = document.querySelector("#content");
+    des.innerHTML = el.description;
+
+    DOM_main.append(headline, image, des);
+  });
+</script>
